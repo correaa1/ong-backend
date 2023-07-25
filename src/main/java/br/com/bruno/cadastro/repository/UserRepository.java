@@ -9,6 +9,6 @@ import java.util.Optional;
 @EnableScan
 @Repository
 public interface UserRepository extends CrudRepository<UsersEntity,String> {
-    Optional<UsersEntity> findById(String s);
+
 
 }

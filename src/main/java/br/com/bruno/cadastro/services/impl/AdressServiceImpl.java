@@ -1,9 +1,9 @@
 package br.com.bruno.cadastro.services.impl;
 
-import br.com.bruno.cadastro.domain.EnderecoEntity;
+import br.com.bruno.cadastro.domain.AdressEntity;
 import br.com.bruno.cadastro.exception.EntityNotFoundException;
-import br.com.bruno.cadastro.repository.EnderecoRepository;
-import br.com.bruno.cadastro.services.EnderecoService;
+import br.com.bruno.cadastro.repository.AdressRepository;
+import br.com.bruno.cadastro.services.AdressService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -11,22 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class EnderecoServiceImpl implements EnderecoService {
+public class AdressServiceImpl implements AdressService {
 
-    private final EnderecoRepository repository;
+    private final AdressRepository repository;
 
-    public EnderecoServiceImpl(EnderecoRepository repository) {
+    public AdressServiceImpl(AdressRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public EnderecoEntity saveEndereco(EnderecoEntity entidade) {
+    public AdressEntity saveEndereco(AdressEntity entidade) {
         entidade.setCreate_at(LocalDate.now().toString());
         return repository.save(entidade);
 
     }
     @Override
-    public EnderecoEntity updateEndereco(EnderecoEntity entidade, String id){
+    public AdressEntity updateEndereco(AdressEntity entidade, String id){
         var findEnderecoId = repository.findById(id);
         if (findEnderecoId.isPresent()){
             findEnderecoId.get().setCep(entidade.getCep() != null ? entidade.getCep() : findEnderecoId.get().getCep());
@@ -60,7 +60,7 @@ public class EnderecoServiceImpl implements EnderecoService {
         return listArrayEndereco.stream().toList();
     }
     @Override
-    public EnderecoEntity getEnderecoId(String id){
+    public AdressEntity getEnderecoId(String id){
         var findEnderecoId = repository.findById(id);
         if(findEnderecoId.isPresent()){
            return findEnderecoId.get();

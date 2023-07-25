@@ -4,10 +4,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import lombok.*;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-/*campos de cadastro: nome, idade, endereco, telefone, tamanho de roupa,
- tamanho do calçado, quantidade de pessoas(referente a familia), quantidade de crianças,
- campo de observações, campo de status(ativo ou inativo)*/
 
 @DynamoDBTable(tableName = "Users")
 @Data
@@ -21,13 +19,12 @@ public class UsersEntity {
     String cpf;
     Integer phone;
     String clothingSize;
-    Integer shoe;
+    BigDecimal shoeSize;
     Integer numberParent;
-    Integer numberchildren;
+    Integer numberChildren;
     String note;
     Boolean stats;
-
-
+    AdressEntity adress;
     @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.S)
     String create_at;
 
