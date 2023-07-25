@@ -14,6 +14,8 @@ public interface EnderecoService {
     void deleteEndereco(String id);
 
     List<Object> getAllEndereco();
+
+    EnderecoEntity getEnderecoId(String id);
 }
 
 

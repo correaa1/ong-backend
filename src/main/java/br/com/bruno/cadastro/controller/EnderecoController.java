@@ -33,4 +33,8 @@ public class EnderecoController {
     public List<Object> getAllEndereco(){
         return service.getAllEndereco();
     }
+    @GetMapping("/{id}")
+    public EnderecoEntity getEnderecoId(@PathVariable("id")String id){
+       return service.getEnderecoId(id);
+    }
 }

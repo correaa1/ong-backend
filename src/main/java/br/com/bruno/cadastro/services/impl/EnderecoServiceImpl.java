@@ -6,6 +6,7 @@ import br.com.bruno.cadastro.repository.EnderecoRepository;
 import br.com.bruno.cadastro.services.EnderecoService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     @Override
     public EnderecoEntity saveEndereco(EnderecoEntity entidade) {
+        entidade.setCreate_at(LocalDate.now().toString());
         return repository.save(entidade);
 
     }
@@ -34,6 +36,7 @@ public class EnderecoServiceImpl implements EnderecoService {
             findEnderecoId.get().setBairro(entidade.getBairro() != null ? entidade.getBairro() : findEnderecoId.get().getBairro());
             findEnderecoId.get().setLocalidade(entidade.getLocalidade() != null ? entidade.getLocalidade() : findEnderecoId.get().getLocalidade());
             findEnderecoId.get().setUf(entidade.getUf() != null ? entidade.getUf() : findEnderecoId.get().getUf());
+            findEnderecoId.get().setUpdate_at(LocalDate.now().toString());
         return repository.save(findEnderecoId.get());
         }
         throw new EntityNotFoundException("Endereço não encontrado!");
@@ -56,6 +59,13 @@ public class EnderecoServiceImpl implements EnderecoService {
         retorno.forEach(x -> listArrayEndereco.add(x));
         return listArrayEndereco.stream().toList();
     }
-
+    @Override
+    public EnderecoEntity getEnderecoId(String id){
+        var findEnderecoId = repository.findById(id);
+        if(findEnderecoId.isPresent()){
+           return findEnderecoId.get();
+        }
+        throw new EntityNotFoundException("Endereço inserido não existe");
+    }
 
 }
