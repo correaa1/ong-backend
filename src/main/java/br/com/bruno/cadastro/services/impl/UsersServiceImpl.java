@@ -6,6 +6,8 @@ import br.com.bruno.cadastro.services.UsersService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 
@@ -45,6 +47,14 @@ public class UsersServiceImpl implements UsersService {
           repository.deleteById(id);
 
       }else{ throw new RuntimeException("Usuário não encontrado");}
+    }
+
+    @Override
+    public List<Object> getAllUsers() {
+        var retorno = repository.findAll();
+        var listDeUsersEntity = new ArrayList<>();
+        retorno.forEach(x-> listDeUsersEntity.add(x));
+        return listDeUsersEntity.stream().toList();
     }
 
 

@@ -4,6 +4,8 @@ import br.com.bruno.cadastro.domain.UsersEntity;
 import br.com.bruno.cadastro.services.UsersService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController("v1/user")
 public class UserController {
     private final UsersService service;
@@ -13,8 +15,8 @@ public class UserController {
     }
 
     @GetMapping
-    public String helloWorld(){
-        return "HelloWorld";
+    public List<Object> helloWorld(){
+        return service.getAllUsers();
     }
 
     @PostMapping

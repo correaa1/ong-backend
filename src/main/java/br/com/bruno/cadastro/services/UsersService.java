@@ -2,6 +2,8 @@ package br.com.bruno.cadastro.services;
 
 import br.com.bruno.cadastro.domain.UsersEntity;
 
+import java.util.List;
+
 
 public interface UsersService {
 
@@ -9,4 +11,6 @@ public interface UsersService {
     UsersEntity updateUsers(UsersEntity entidade, String id);
 
     void deleteUser(String id);
+
+    List<Object> getAllUsers();
 }
