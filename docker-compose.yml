@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  ong-backend-app:
+    image: ong-backend
+    container_name: ong-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - JAVA_OPTS=-Xmx1g -Xms1g
+      - SPRING_PROFILES_ACTIVE=prod
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_REGION=us-east-1
