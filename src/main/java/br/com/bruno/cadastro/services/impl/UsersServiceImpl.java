@@ -57,5 +57,17 @@ public class UsersServiceImpl implements UsersService {
         return listDeUsersEntity.stream().toList();
     }
 
+    @Override
+    public UsersEntity getUserById(String id) {
+        return repository.findById(id).orElseThrow(()-> new RuntimeException("Usuário não encontrado"));
+
+        //Codigo a baixo e tem o mesmo efeito do de cima
+        /*var retorno = repository.findById(id);
+        if (retorno.isPresent()){
+            return retorno.get();
+        }
+        throw new RuntimeException("Usuário não encontrado");*/
+    }
+
 
 }

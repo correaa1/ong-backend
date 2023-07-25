@@ -13,4 +13,6 @@ public interface UsersService {
     void deleteUser(String id);
 
     List<Object> getAllUsers();
+
+    UsersEntity getUserById(String id);
 }

@@ -19,6 +19,12 @@ public class UserController {
         return service.getAllUsers();
     }
 
+    @GetMapping("/{id}")
+    public UsersEntity getUserById(@PathVariable("id") String id){
+        return  service.getUserById(id);
+
+    }
+
     @PostMapping
     public UsersEntity SaveUser(@RequestBody UsersEntity entity ){
         var retorno = service.saveUsers(entity);
