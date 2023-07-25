@@ -2,6 +2,7 @@ package br.com.bruno.cadastro.controller;
 
 import br.com.bruno.cadastro.domain.UsersEntity;
 import br.com.bruno.cadastro.services.UsersService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class UserController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public UsersEntity SaveUser(@RequestBody UsersEntity entity ){
         var retorno = service.saveUsers(entity);
         return retorno;
@@ -37,6 +39,7 @@ public class UserController {
         return retorno;
     }
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable("id") String id){
        service.deleteUser(id);
 

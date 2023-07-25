@@ -1,8 +1,11 @@
 package br.com.bruno.cadastro.services.impl;
 
 import br.com.bruno.cadastro.domain.UsersEntity;
+import br.com.bruno.cadastro.exception.EntityNotFoundException;
 import br.com.bruno.cadastro.repository.UserRepository;
 import br.com.bruno.cadastro.services.UsersService;
+import org.apache.http.HttpException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,7 +24,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public UsersEntity saveUsers(UsersEntity entidade){
+    public UsersEntity saveUsers(UsersEntity entidade) {
         entidade.setCreate_at(LocalDate.now().toString());
         return repository.save(entidade);
 
@@ -29,37 +32,39 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public UsersEntity updateUsers(UsersEntity entidade, String id) {
-      var findId = repository.findById(id);
-      if (findId.isPresent()){
-          findId.get().setNome(entidade.getNome());
-          findId.get().setUpdate_at(LocalDate.now().toString());
-          return repository.save(findId.get());
+        var findId = repository.findById(id);
+        if (findId.isPresent()) {
+            findId.get().setNome(entidade.getNome());
+            findId.get().setUpdate_at(LocalDate.now().toString());
+            return repository.save(findId.get());
 
 
-      }
-      throw new RuntimeException("Usuário não encontrado");
-      }
+        }
+        throw new EntityNotFoundException();
+    }
 
     @Override
     public void deleteUser(String id) {
-      var findId = repository.findById(id);
-      if(findId.isPresent()){
-          repository.deleteById(id);
+        var findId = repository.findById(id);
+        if (findId.isPresent()) {
+            repository.deleteById(id);
 
-      }else{ throw new RuntimeException("Usuário não encontrado");}
+        } else {
+            throw new EntityNotFoundException();
+        }
     }
 
     @Override
     public List<Object> getAllUsers() {
         var retorno = repository.findAll();
         var listDeUsersEntity = new ArrayList<>();
-        retorno.forEach(x-> listDeUsersEntity.add(x));
+        retorno.forEach(x -> listDeUsersEntity.add(x));
         return listDeUsersEntity.stream().toList();
     }
 
     @Override
     public UsersEntity getUserById(String id) {
-        return repository.findById(id).orElseThrow(()-> new RuntimeException("Usuário não encontrado"));
+        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
 
         //Codigo a baixo e tem o mesmo efeito do de cima
         /*var retorno = repository.findById(id);
