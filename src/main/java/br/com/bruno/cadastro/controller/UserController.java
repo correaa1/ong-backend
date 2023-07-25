@@ -17,7 +17,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<Object> helloWorld(){
+    public List<Object> getAllUsers(){
         return service.getAllUsers();
     }
 
