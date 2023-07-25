@@ -56,9 +56,9 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public List<Object> getAllUsers() {
         var retorno = repository.findAll();
-        var listDeUsersEntity = new ArrayList<>();
-        retorno.forEach(x -> listDeUsersEntity.add(x));
-        return listDeUsersEntity.stream().toList();
+        List<Object> listaUserEntity = new ArrayList<>();
+        retorno.forEach(x -> listaUserEntity.add(x));
+        return listaUserEntity;
     }
 
     @Override
