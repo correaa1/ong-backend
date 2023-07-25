@@ -1,0 +1,22 @@
+version: "3.3"
+services:
+  localstack:
+    container_name: localstack
+    image: localstack/localstack:0.12.12
+    ports:
+      - 4566:4566
+    environment:
+      - SERVICES=dynamodb,sqs,sns
+      - DEBUG=${DEBUG- }
+      - DATA_DIR=${DATA_DIR- }
+      - PORT_WEB_UI=4566
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR- }
+      - KINESIS_ERROR_PROBABILITY=${KINESIS_ERROR_PROBABILITY- }
+      - DOCKER_HOST=${DOCKER_LOCATION}
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_DEFAULT_OUTPUT=json
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/var/lib/localstack"
+      - "./init-aws.sh:/docker-entrypoint-initaws.d/init-aws.sh"
