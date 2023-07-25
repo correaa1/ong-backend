@@ -4,13 +4,11 @@ import br.com.bruno.cadastro.domain.UsersEntity;
 import br.com.bruno.cadastro.services.UsersService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.core.Response;
-
-@RestController
-public class TestController {
+@RestController("v1/user")
+public class UserController {
     private final UsersService service;
 
-    public TestController(UsersService service) {
+    public UserController(UsersService service) {
         this.service = service;
     }
 
