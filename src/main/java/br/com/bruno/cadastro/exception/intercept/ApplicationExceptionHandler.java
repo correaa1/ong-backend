@@ -18,16 +18,14 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
             StandardError standardError = new StandardError(Instant.now(),
                     ((ApplicationException) e).getHttpStatus().value(),
                     e.getLocalizedMessage(),
-                    e.getMessage(),
-                    request.getRequestURI());
+                    e.getMessage());
             return ResponseEntity.status(standardError.getStatus()).body(standardError);
         }
 
         StandardError standardError = new StandardError(Instant.now(),
                 500,
                 e.getLocalizedMessage(),
-                "Ocorreu um erro inesperado!",
-                request.getRequestURI());
+                "Ocorreu um erro inesperado!");
 
         e.printStackTrace();
 

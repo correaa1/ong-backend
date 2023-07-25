@@ -40,7 +40,7 @@ public class UsersServiceImpl implements UsersService {
 
 
         }
-        throw new EntityNotFoundException();
+        throw new EntityNotFoundException("Usuário não encontrado.!");
     }
 
     @Override
@@ -50,7 +50,7 @@ public class UsersServiceImpl implements UsersService {
             repository.deleteById(id);
 
         } else {
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("Usuário não encontrado.!");
         }
     }
 
@@ -64,7 +64,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public UsersEntity getUserById(String id) {
-        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return repository.findById(id).orElseThrow(()-> new EntityNotFoundException("Usuário não encontrado.!"));
 
         //Codigo a baixo e tem o mesmo efeito do de cima
         /*var retorno = repository.findById(id);
