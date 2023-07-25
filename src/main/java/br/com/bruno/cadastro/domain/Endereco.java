@@ -23,6 +23,7 @@ public class Endereco {
     String cep;
     @DynamoDBAttribute
     String logradouro;
+    @DynamoDBAttribute String numero;
     @DynamoDBAttribute
     String complemento;
     @DynamoDBAttribute
