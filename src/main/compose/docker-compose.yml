@@ -6,7 +6,7 @@ services:
     ports:
       - 4566:4566
     environment:
-      - SERVICES=dynamodb,sqs,sns
+      - SERVICES=dynamodb
       - DEBUG=${DEBUG- }
       - DATA_DIR=${DATA_DIR- }
       - PORT_WEB_UI=4566
