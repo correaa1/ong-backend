@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 @EnableScan
 @Repository
-public interface UserRepository extends JpaRepository<UsersEntity,String> {
+public interface UserRepository extends CrudRepository<UsersEntity,String> {
 
     Optional<List<UsersEntity>> findByStats(boolean stats);
 

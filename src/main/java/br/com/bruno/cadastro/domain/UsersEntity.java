@@ -13,8 +13,9 @@ public class UsersEntity {
     String id;
     String name;
     Boolean stats;
+    SubUserEntity subUserEntity;
     InfoUsersEntity infoUsers;
-    AdressEntity adress;
+    AddressEntity address;
     String create_at;
     String update_at;
 
