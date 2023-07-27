@@ -13,7 +13,6 @@ public class UsersEntity {
     String id;
     @DynamoDBAttribute
     String name;
-    InfoUsersEntity infoUsers;
     AdressEntity adress;
     String create_at;
     String update_at;
