@@ -16,19 +16,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @DynamoDBDocument
 public class InfoUsersEntity {
-    @DynamoDBAttribute
     Integer phone;
-    @DynamoDBAttribute
     String clothingSize;
-    @DynamoDBAttribute
     Integer shoe;
-    @DynamoDBAttribute
     Integer amountParent;
-    @DynamoDBAttribute
     Integer amountChildren;
-    @DynamoDBAttribute
     String note;
-    @DynamoDBAttribute
-    Boolean stats;
-
+    Boolean mainParent;
 }

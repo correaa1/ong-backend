@@ -21,6 +21,11 @@ public class UserController {
         return service.getAllUsers();
     }
 
+    @GetMapping("/stats")
+    public  List<UsersEntity> getUserByStats(){
+        return service.getUserByStats(true);
+    }
+
     @GetMapping("/{id}")
     public UsersEntity getUserById(@PathVariable("id") String id){
         return service.getUserById(id);

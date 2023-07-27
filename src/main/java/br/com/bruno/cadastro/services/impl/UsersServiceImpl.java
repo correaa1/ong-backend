@@ -4,8 +4,7 @@ import br.com.bruno.cadastro.domain.UsersEntity;
 import br.com.bruno.cadastro.exception.EntityNotFoundException;
 import br.com.bruno.cadastro.repository.UserRepository;
 import br.com.bruno.cadastro.services.UsersService;
-import org.apache.http.HttpException;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -59,7 +58,12 @@ public class UsersServiceImpl implements UsersService {
         var retorno = repository.findAll();
         List<Object> listaUserEntity = new ArrayList<>();
         retorno.forEach(x -> listaUserEntity.add(x));
+
         return listaUserEntity;
+    }
+    @Override
+    public List<UsersEntity> getUserByStats(boolean stats){
+        return repository.findByStats(stats).get().stream().toList();
     }
 
     @Override

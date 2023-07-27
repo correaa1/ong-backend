@@ -11,8 +11,8 @@ import lombok.*;
 public class UsersEntity {
     @DynamoDBHashKey
     String id;
-    @DynamoDBAttribute
     String name;
+    Boolean stats;
     InfoUsersEntity infoUsers;
     AdressEntity adress;
     String create_at;

@@ -14,5 +14,7 @@ public interface UsersService {
 
     List<Object> getAllUsers();
 
+    List<UsersEntity> getUserByStats(boolean stats);
+
     UsersEntity getUserById(String id);
 }
