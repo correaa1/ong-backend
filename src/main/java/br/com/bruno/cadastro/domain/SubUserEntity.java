@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @DynamoDBDocument
 public class SubUserEntity {
-
     String name;
     InfoUsersEntity infoUsers;
     AddressEntity address;
