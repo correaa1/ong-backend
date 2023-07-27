@@ -1,11 +1,7 @@
 package br.com.bruno.cadastro.domain;
-
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import lombok.*;
 
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @DynamoDBTable(tableName = "Users")
 @Data
@@ -15,19 +11,11 @@ import java.time.LocalDate;
 public class UsersEntity {
     @DynamoDBHashKey
     String id;
+    @DynamoDBAttribute
     String name;
-    String cpf;
-    Integer phone;
-    String clothingSize;
-    BigDecimal shoeSize;
-    Integer numberParent;
-    Integer numberChildren;
-    String note;
-    Boolean stats;
+    InfoUsersEntity infoUsers;
     AdressEntity adress;
-    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.S)
     String create_at;
-
-    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.S)
     String update_at;
+
 }

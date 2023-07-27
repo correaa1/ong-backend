@@ -24,6 +24,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public UsersEntity saveUsers(UsersEntity entidade) {
+
         entidade.setCreate_at(LocalDate.now().toString());
         return repository.save(entidade);
 
@@ -33,7 +34,7 @@ public class UsersServiceImpl implements UsersService {
     public UsersEntity updateUsers(UsersEntity entidade, String id) {
         var findId = repository.findById(id);
         if (findId.isPresent()) {
-            findId.get().setNome(entidade.getNome());
+            findId.get().setName(entidade.getName());
             findId.get().setUpdate_at(LocalDate.now().toString());
             return repository.save(findId.get());
 

@@ -21,7 +21,8 @@ public class AdressServiceImpl implements AdressService {
 
     @Override
     public AdressEntity saveEndereco(AdressEntity entidade) {
-        entidade.setCreate_at(LocalDate.now().toString());
+
+
         return repository.save(entidade);
 
     }
@@ -36,7 +37,7 @@ public class AdressServiceImpl implements AdressService {
             findEnderecoId.get().setBairro(entidade.getBairro() != null ? entidade.getBairro() : findEnderecoId.get().getBairro());
             findEnderecoId.get().setLocalidade(entidade.getLocalidade() != null ? entidade.getLocalidade() : findEnderecoId.get().getLocalidade());
             findEnderecoId.get().setUf(entidade.getUf() != null ? entidade.getUf() : findEnderecoId.get().getUf());
-            findEnderecoId.get().setUpdate_at(LocalDate.now().toString());
+
         return repository.save(findEnderecoId.get());
         }
         throw new EntityNotFoundException("Endereço não encontrado!");
