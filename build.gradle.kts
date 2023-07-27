@@ -23,6 +23,8 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.data:spring-data-jpa:3.1.2")
+
     implementation("com.github.derjust:spring-data-dynamodb:5.1.0")
     implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.512")
     implementation("org.jboss.spec.javax.ws.rs:jboss-jaxrs-api_2.1_spec:2.0.2.Final")
