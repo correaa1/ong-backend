@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @DynamoDBDocument
 public class AdressEntity {
-
-
+    @DynamoDBHashKey
     @DynamoDBAttribute
     String cep;
     @DynamoDBAttribute
