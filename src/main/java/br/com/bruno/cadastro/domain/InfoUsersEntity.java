@@ -21,5 +21,5 @@ public class InfoUsersEntity {
     Integer amountParent;
     Integer amountChildren;
     String note;
-    Boolean mainParent;
+
 }

@@ -13,6 +13,7 @@ public class UsersEntity {
     String id;
     String name;
     Boolean stats;
+    Boolean mainParent;
     SubUserEntity subUserEntity;
     InfoUsersEntity infoUsers;
     AddressEntity address;

@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsersServiceImpl implements UsersService {
 
 
     private final UserRepository repository;
+    private String address;
 
     public UsersServiceImpl(UserRepository repository) {
         this.repository = repository;
@@ -63,8 +65,22 @@ public class UsersServiceImpl implements UsersService {
     }
     @Override
     public List<UsersEntity> getUserByStats(boolean stats){
+
         return repository.findByStats(stats).get().stream().toList();
+
     }
+
+    @Override
+    public List <UsersEntity>  getUserByName(String name ){
+
+        return repository.findByName(name).get().stream().toList();
+    }
+
+    @Override
+    public List<UsersEntity> getUsersByAddress(String address){
+        return repository.findByAddress(address).get().stream().toList();
+    }
+
 
     @Override
     public UsersEntity getUserById(String id) {

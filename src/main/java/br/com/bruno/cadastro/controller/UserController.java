@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -23,14 +24,27 @@ public class UserController {
 
     @GetMapping("/stats")
     public  List<UsersEntity> getUserByStats(){
+
         return service.getUserByStats(true);
     }
+    @GetMapping("/{name}")
+    public  List <UsersEntity>  getUserByName(@PathVariable("name") String name) {
 
-    @GetMapping("/{id}")
+        return service.getUserByName(name);
+
+    }
+
+    @GetMapping("/address")
+    public  List<UsersEntity> getAllAddress(){
+        return service.getUsersByAddress("address");
+    }
+
+    //por algum motivo que não sei, o getMapping name está executando esse getMapping de id, por isso está comentado o código abaixo
+    /*@GetMapping("/{id}")
     public UsersEntity getUserById(@PathVariable("id") String id){
         return service.getUserById(id);
 
-    }
+    }*/
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
