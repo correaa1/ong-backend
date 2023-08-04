@@ -12,7 +12,7 @@ public interface UsersService {
 
     void deleteUser(String id);
 
-    List<Object> getAllUsers();
+    List<UsersEntity> getAllUsers();
 
     List<UsersEntity> getUserByStats(boolean stats);
     List<UsersEntity> getUserByName(String name);
@@ -24,4 +24,5 @@ public interface UsersService {
     UsersEntity getUserById(String id);
 
 
+    List<UsersEntity> getByMainparatById(String idMainParent);
 }

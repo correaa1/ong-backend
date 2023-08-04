@@ -14,7 +14,7 @@ public class UsersEntity {
     String name;
     Boolean stats;
     Boolean mainParent;
-    SubUserEntity subUserEntity;
+    String idMainParent;
     InfoUsersEntity infoUsers;
     AddressEntity address;
     String create_at;

@@ -10,7 +10,7 @@ import java.util.Optional;
 @EnableScan
 @Repository
 public interface UserRepository extends CrudRepository<UsersEntity,String> {
-
+    Optional<List<UsersEntity>> findByidMainParent(String idMainParent);
     Optional<List<UsersEntity>> findByStats(boolean stats);
     Optional<List<UsersEntity>> findByAddress(String address);
 

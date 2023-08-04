@@ -17,10 +17,6 @@ public class UserController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<Object> getAllUsers(){
-        return service.getAllUsers();
-    }
 
     @GetMapping("/stats")
     public  List<UsersEntity> getUserByStats(){
@@ -32,6 +28,14 @@ public class UserController {
 
         return service.getUserByName(name);
 
+    }
+
+    @GetMapping
+    public List<UsersEntity> getByMainparatById(@RequestParam(required = false) String idMainParent){
+        if(Objects.isNull(idMainParent)){
+            return service.getAllUsers();
+        }
+        return service.getByMainparatById(idMainParent);
     }
 
     @GetMapping("/address")

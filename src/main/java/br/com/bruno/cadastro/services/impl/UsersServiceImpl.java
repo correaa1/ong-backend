@@ -56,9 +56,9 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<Object> getAllUsers() {
+    public List<UsersEntity> getAllUsers() {
         var retorno = repository.findAll();
-        List<Object> listaUserEntity = new ArrayList<>();
+        List<UsersEntity> listaUserEntity = new ArrayList<>();
         retorno.forEach(x -> listaUserEntity.add(x));
 
         return listaUserEntity;
@@ -92,6 +92,11 @@ public class UsersServiceImpl implements UsersService {
             return retorno.get();
         }
         throw new RuntimeException("Usuário não encontrado");*/
+    }
+
+    @Override
+    public List<UsersEntity> getByMainparatById(String idMainParent) {
+        return repository.findByidMainParent(idMainParent).get().stream().toList();
     }
 
 
