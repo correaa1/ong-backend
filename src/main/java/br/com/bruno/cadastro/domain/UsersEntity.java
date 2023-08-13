@@ -12,11 +12,13 @@ public class UsersEntity {
     @DynamoDBHashKey
     String id;
     String name;
+    DeliveryMouthEntity deliveryMonth;
     Boolean stats;
     Boolean mainParent;
     String idMainParent;
     InfoUsersEntity infoUsers;
     AddressEntity address;
+    String idMainParentRelational;
     String create_at;
     String update_at;
 

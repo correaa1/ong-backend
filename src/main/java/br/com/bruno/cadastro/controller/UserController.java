@@ -4,13 +4,16 @@ import br.com.bruno.cadastro.domain.UsersEntity;
 import br.com.bruno.cadastro.services.UsersService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 import java.util.Objects;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/v1/users")
 public class UserController {
+
     private final UsersService service;
 
     public UserController(UsersService service) {
@@ -23,12 +26,13 @@ public class UserController {
 
         return service.getUserByStats(true);
     }
-    @GetMapping("/{name}")
+   /* @GetMapping("/{name}")
     public  List <UsersEntity>  getUserByName(@PathVariable("name") String name) {
 
         return service.getUserByName(name);
 
-    }
+    }*/
+
 
     @GetMapping
     public List<UsersEntity> getByMainparatById(@RequestParam(required = false) String idMainParent){
@@ -44,11 +48,11 @@ public class UserController {
     }
 
     //por algum motivo que não sei, o getMapping name está executando esse getMapping de id, por isso está comentado o código abaixo
-    /*@GetMapping("/{id}")
+    @GetMapping("/{id}")
     public UsersEntity getUserById(@PathVariable("id") String id){
         return service.getUserById(id);
 
-    }*/
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -59,6 +63,7 @@ public class UserController {
     @PutMapping("/{id}")
     public UsersEntity updateUser(@RequestBody UsersEntity entity, @PathVariable("id") String id){
         var retorno = service.updateUsers(entity, id);
+
         return retorno;
     }
     @DeleteMapping("/{id}")

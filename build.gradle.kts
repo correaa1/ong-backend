@@ -26,6 +26,7 @@ dependencies {
     implementation("com.github.derjust:spring-data-dynamodb:5.1.0")
     implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.512")
     implementation("org.jboss.spec.javax.ws.rs:jboss-jaxrs-api_2.1_spec:2.0.2.Final")
+    testImplementation ("org.apache.httpcomponents:httpclient")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

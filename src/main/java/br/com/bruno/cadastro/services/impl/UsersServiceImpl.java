@@ -39,7 +39,6 @@ public class UsersServiceImpl implements UsersService {
             findId.get().setUpdate_at(LocalDate.now().toString());
             return repository.save(findId.get());
 
-
         }
         throw new EntityNotFoundException("Usuário não encontrado!");
     }
@@ -93,6 +92,7 @@ public class UsersServiceImpl implements UsersService {
         }
         throw new RuntimeException("Usuário não encontrado");*/
     }
+
 
     @Override
     public List<UsersEntity> getByMainparatById(String idMainParent) {

@@ -13,8 +13,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @DynamoDBDocument
 public class AddressEntity {
-    String zipCode;
-    String number;
+
     String district;
     String street;
+    String number;
+    String zipCode;
+
+
 }
