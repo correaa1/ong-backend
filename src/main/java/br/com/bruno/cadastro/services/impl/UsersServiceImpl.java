@@ -34,8 +34,15 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public UsersEntity updateUsers(UsersEntity entidade, String id) {
         var findId = repository.findById(id);
+
         if (findId.isPresent()) {
             findId.get().setName(entidade.getName());
+            findId.get().setIdMainParent(entidade.getIdMainParent());
+            findId.get().setMainParent(entidade.getMainParent());
+            findId.get().setStats(entidade.getStats());
+            findId.get().setInfoUsers(entidade.getInfoUsers());
+            findId.get().setDeliveryMonth(entidade.getDeliveryMonth());
+            findId.get().setAddress(entidade.getAddress());
             findId.get().setUpdate_at(LocalDate.now().toString());
             return repository.save(findId.get());
 
