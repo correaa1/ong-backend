@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -28,7 +27,6 @@ public class UsersServiceImpl implements UsersService {
 
         entidade.setCreate_at(LocalDate.now().toString());
         return repository.save(entidade);
-
     }
 
     @Override
@@ -41,9 +39,11 @@ public class UsersServiceImpl implements UsersService {
             findId.get().setMainParent(entidade.getMainParent());
             findId.get().setStats(entidade.getStats());
             findId.get().setInfoUsers(entidade.getInfoUsers());
-            findId.get().setDeliveryMonth(entidade.getDeliveryMonth());
+            findId.get().setMonth(entidade.getMonth()  );
             findId.get().setAddress(entidade.getAddress());
+            findId.get().setAge(entidade.getAge());
             findId.get().setUpdate_at(LocalDate.now().toString());
+
             return repository.save(findId.get());
 
         }
@@ -102,9 +102,13 @@ public class UsersServiceImpl implements UsersService {
 
 
     @Override
-    public List<UsersEntity> getByMainparatById(String idMainParent) {
+    public List<UsersEntity> getByMainparatById(String idMainParent ) {
         return repository.findByidMainParent(idMainParent).get().stream().toList();
-    }
 
+    }
+    @Override
+    public List<UsersEntity> getMainParentRelational(String idMainParentRelational) {
+        return repository.findByidMainParentRelational(idMainParentRelational).get().stream().toList();
+    }
 
 }

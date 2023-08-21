@@ -7,7 +7,7 @@ import br.com.bruno.cadastro.services.DeliveryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.time.LocalDate;
 @Service
 public class DeliveryServiceImpl implements DeliveryService {
 
@@ -23,7 +23,11 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public List<DeliveryEntity> saveUsersDelivery(List<DeliveryEntity> entidades) {
-        return (List<DeliveryEntity>) repository.saveAll(entidades);
+        return (List<DeliveryEntity>)
+
+                repository.saveAll(entidades);
+
+
     }
 
     @Override
@@ -31,5 +35,15 @@ public class DeliveryServiceImpl implements DeliveryService {
         return (List<DeliveryEntity>) repository.findAll();
     }
 
+    @Override
+    public void deleteUser(String idDelivery) {
+        var findId = repository.findById(idDelivery);
+        if (findId.isPresent()) {
+            repository.deleteById(idDelivery);
+
+        } else {
+            throw new EntityNotFoundException("Usuário não encontrado.!");
+        }
+    }
 
 }

@@ -23,6 +23,8 @@ public interface UsersService {
 
     UsersEntity getUserById(String id);
 
+    List<UsersEntity> getByMainparatById(String idMainParent );
 
-    List<UsersEntity> getByMainparatById(String idMainParent);
+    List<UsersEntity> getMainParentRelational(String idMainParentRelational);
+
 }

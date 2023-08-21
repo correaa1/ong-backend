@@ -7,5 +7,7 @@ public interface DeliveryService {
 
     List<DeliveryEntity> saveUsersDelivery(List<DeliveryEntity> entidades);
 
+    void deleteUser(String idDelivery);
+
     List<DeliveryEntity> getUsersDelivery();
 }

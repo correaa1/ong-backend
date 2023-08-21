@@ -27,4 +27,12 @@ public class DeliveryController {
     public List<DeliveryEntity> getUsersDelivery(){
         return service.getUsersDelivery();
     }
+
+    @DeleteMapping("/{idDelivery}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable("idDelivery") String id){
+        service.deleteUser(id);
+
+    }
+
 }

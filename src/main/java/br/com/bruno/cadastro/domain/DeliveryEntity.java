@@ -23,6 +23,7 @@ public class DeliveryEntity {
     String idDelivery;
     AddressEntity address;
     String nameUser;
+    InfoUsersEntity infoUsers;
     String idUser;
     String create_at;
     String update_at;

@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,9 +36,17 @@ public class UserController {
     }*/
 
 
+    @GetMapping("/family")
+    public List<UsersEntity> getMainParentRelational(@RequestParam(required = false )String idMainParentRelational){
+        if(Objects.isNull(idMainParentRelational) ){
+            return service.getAllUsers();
+        }
+        return service.getMainParentRelational(idMainParentRelational);
+
+    }
     @GetMapping
     public List<UsersEntity> getByMainparatById(@RequestParam(required = false) String idMainParent){
-        if(Objects.isNull(idMainParent)){
+        if(Objects.isNull(idMainParent) ){
             return service.getAllUsers();
         }
         return service.getByMainparatById(idMainParent);
