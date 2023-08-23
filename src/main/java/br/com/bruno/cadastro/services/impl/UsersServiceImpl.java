@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -69,12 +70,21 @@ public class UsersServiceImpl implements UsersService {
 
         return listaUserEntity;
     }
-    @Override
-    public List<UsersEntity> getUserByStats(boolean stats){
+    public List<UsersEntity> getUserByStats(boolean stats, boolean mainParent) {
+        System.out.println("getUserByStats - stats: "  + stats + ", mainParent: " + mainParent);
 
-        return repository.findByStats(stats).get().stream().toList();
+        List<UsersEntity> allUsers = (List<UsersEntity>) repository.findAll();
+        List<UsersEntity> filteredUsers = new ArrayList<>();
 
+        for (UsersEntity user : allUsers) {
+            if (user.getStats() == stats && user.getMainParent() == mainParent) {
+                filteredUsers.add(user);
+            }
+        }
+
+        return filteredUsers;
     }
+
 
     @Override
     public List <UsersEntity>  getUserByName(String name ){
@@ -106,9 +116,6 @@ public class UsersServiceImpl implements UsersService {
         return repository.findByidMainParent(idMainParent).get().stream().toList();
 
     }
-    @Override
-    public List<UsersEntity> getMainParentRelational(String idMainParentRelational) {
-        return repository.findByidMainParentRelational(idMainParentRelational).get().stream().toList();
-    }
+
 
 }

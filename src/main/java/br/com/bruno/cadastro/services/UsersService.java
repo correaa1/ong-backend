@@ -14,7 +14,7 @@ public interface UsersService {
 
     List<UsersEntity> getAllUsers();
 
-    List<UsersEntity> getUserByStats(boolean stats);
+    List<UsersEntity> getUserByStats(boolean stats, boolean mainParent);
     List<UsersEntity> getUserByName(String name);
 
 
@@ -25,6 +25,5 @@ public interface UsersService {
 
     List<UsersEntity> getByMainparatById(String idMainParent );
 
-    List<UsersEntity> getMainParentRelational(String idMainParentRelational);
 
 }

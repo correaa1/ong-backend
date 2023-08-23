@@ -11,10 +11,9 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends CrudRepository<UsersEntity,String> {
     Optional<List<UsersEntity>> findByidMainParent(String idMainParent);
-    Optional<List<UsersEntity>> findByStats(boolean stats);
+    Optional<List<UsersEntity>> findByStats(boolean stats, boolean mainParent);
     Optional<List<UsersEntity>> findByAddress(String address);
 
     Optional <List<UsersEntity>> findByName(String name);
 
-    Optional<List<UsersEntity>>findByidMainParentRelational(String idMainParentRelational);
 }

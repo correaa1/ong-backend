@@ -24,9 +24,8 @@ public class UserController {
 
 
     @GetMapping("/stats")
-    public  List<UsersEntity> getUserByStats(){
-
-        return service.getUserByStats(true);
+    public List<UsersEntity> getUserByStats( ) {
+        return service.getUserByStats(true, true);
     }
    /* @GetMapping("/{name}")
     public  List <UsersEntity>  getUserByName(@PathVariable("name") String name) {
@@ -36,14 +35,7 @@ public class UserController {
     }*/
 
 
-    @GetMapping("/family")
-    public List<UsersEntity> getMainParentRelational(@RequestParam(required = false )String idMainParentRelational){
-        if(Objects.isNull(idMainParentRelational) ){
-            return service.getAllUsers();
-        }
-        return service.getMainParentRelational(idMainParentRelational);
 
-    }
     @GetMapping
     public List<UsersEntity> getByMainparatById(@RequestParam(required = false) String idMainParent){
         if(Objects.isNull(idMainParent) ){
