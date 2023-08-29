@@ -14,6 +14,5 @@ public interface UserRepository extends CrudRepository<UsersEntity,String> {
     Optional<List<UsersEntity>> findByStats(boolean stats, boolean mainParent);
     Optional<List<UsersEntity>> findByAddress(String address);
 
-    Optional <List<UsersEntity>> findByName(String name);
 
 }

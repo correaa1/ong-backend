@@ -27,12 +27,9 @@ public class UserController {
     public List<UsersEntity> getUserByStats( ) {
         return service.getUserByStats(true, true);
     }
-   /* @GetMapping("/{name}")
-    public  List <UsersEntity>  getUserByName(@PathVariable("name") String name) {
 
-        return service.getUserByName(name);
 
-    }*/
+
 
 
 
@@ -59,8 +56,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UsersEntity SaveUser(@RequestBody UsersEntity entity ){
-        var retorno = service.saveUsers(entity);
-        return retorno;
+        return service.saveUsers(entity);
     }
     @PutMapping("/{id}")
     public UsersEntity updateUser(@RequestBody UsersEntity entity, @PathVariable("id") String id){

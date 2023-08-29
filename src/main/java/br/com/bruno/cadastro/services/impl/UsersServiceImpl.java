@@ -71,7 +71,6 @@ public class UsersServiceImpl implements UsersService {
         return listaUserEntity;
     }
     public List<UsersEntity> getUserByStats(boolean stats, boolean mainParent) {
-        System.out.println("getUserByStats - stats: "  + stats + ", mainParent: " + mainParent);
 
         List<UsersEntity> allUsers = (List<UsersEntity>) repository.findAll();
         List<UsersEntity> filteredUsers = new ArrayList<>();
@@ -81,16 +80,14 @@ public class UsersServiceImpl implements UsersService {
                 filteredUsers.add(user);
             }
         }
-
+        if (filteredUsers.isEmpty()) {
+            throw new RuntimeException("Nenhum usuário encontrado com as condições especificadas.");
+        }
         return filteredUsers;
+
     }
 
 
-    @Override
-    public List <UsersEntity>  getUserByName(String name ){
-
-        return repository.findByName(name).get().stream().toList();
-    }
 
     @Override
     public List<UsersEntity> getUsersByAddress(String address){

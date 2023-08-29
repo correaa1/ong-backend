@@ -15,7 +15,6 @@ public interface UsersService {
     List<UsersEntity> getAllUsers();
 
     List<UsersEntity> getUserByStats(boolean stats, boolean mainParent);
-    List<UsersEntity> getUserByName(String name);
 
 
     List<UsersEntity> getUsersByAddress(String address);

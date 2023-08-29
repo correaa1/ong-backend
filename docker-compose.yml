@@ -12,6 +12,6 @@ services:
     environment:
       - JAVA_OPTS=-Xmx1g -Xms1g
       - SPRING_PROFILES_ACTIVE=prod
-      - AWS_ACCESS_KEY_ID=test
-      - AWS_SECRET_ACCESS_KEY=test
-      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=AKIA3PDDIGX6JH6G5AN5
+      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_REGION=us-east-2
