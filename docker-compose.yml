@@ -15,3 +15,4 @@ services:
       - AWS_ACCESS_KEY_ID=teste
       - AWS_SECRET_ACCESS_KEY=teste
       - AWS_REGION=us-east-2
+      - AWS_ENDPOINT_URL=https://localhost.localstack.cloud:4566
