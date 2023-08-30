@@ -15,6 +15,6 @@ services:
       - DOCKER_HOST=${DOCKER_LOCATION}
 
     volumes:
-      - "./init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh"
+      - "./src/main/compose/init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh"
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
