@@ -29,10 +29,6 @@ public class UserController {
     }
 
 
-
-
-
-
     @GetMapping
     public List<UsersEntity> getByMainparatById(@RequestParam(required = false) String idMainParent){
         if(Objects.isNull(idMainParent) ){
