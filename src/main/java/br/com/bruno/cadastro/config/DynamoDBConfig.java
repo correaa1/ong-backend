@@ -9,12 +9,18 @@ import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRep
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+
+import java.net.URI;
 
 
 @Configuration
 @EnableDynamoDBRepositories(basePackages = "br.com.bruno.cadastro.repository")
-
 public class DynamoDBConfig {
+
     @Value("${amazon.dynamodb.endpoint}")
     private String amazonDynamoDBEndpoint;
 
@@ -24,21 +30,22 @@ public class DynamoDBConfig {
     @Value("${amazon.aws.secretkey}")
     private String amazonAWSSecretKey;
 
+    @Value("${amazon.aws.region}")
+    private String amazonAWSRegion;
+
     @Bean
-    public AmazonDynamoDB amazonDynamoDB() {
-        AmazonDynamoDB amazonDynamoDB
-                = new AmazonDynamoDBClient(amazonAWSCredentials());
+    public DynamoDbClient dynamoDbClient() {
+        var builder = DynamoDbClient.builder()
+                .credentialsProvider(StaticCredentialsProvider.create(
+                        AwsBasicCredentials.create(amazonAWSAccessKey, amazonAWSSecretKey)))
+                .region(Region.of(amazonAWSRegion));
+
+
 
         if (!StringUtils.isEmpty(amazonDynamoDBEndpoint)) {
-            amazonDynamoDB.setEndpoint(amazonDynamoDBEndpoint);
+            builder.endpointOverride(URI.create(amazonDynamoDBEndpoint));
         }
 
-        return amazonDynamoDB;
-    }
-
-    @Bean
-    public AWSCredentials amazonAWSCredentials() {
-        return new BasicAWSCredentials(
-                amazonAWSAccessKey, amazonAWSSecretKey);
+        return builder.build();
     }
 }
