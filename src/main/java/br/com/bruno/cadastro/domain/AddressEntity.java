@@ -1,6 +1,8 @@
 package br.com.bruno.cadastro.domain;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,9 +13,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@DynamoDBDocument
-public class AddressEntity {
 
+public class AddressEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     String district;
     String street;
     String number;

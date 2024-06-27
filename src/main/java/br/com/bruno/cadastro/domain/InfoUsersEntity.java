@@ -1,19 +1,19 @@
 package br.com.bruno.cadastro.domain;
 
-
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-@DynamoDBDocument
+@Entity
+@Table(name = "tb_info_users")
 public class InfoUsersEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    String id;
+
     Integer phone;
     String clothingSize;
     Integer shoe;
@@ -21,4 +21,7 @@ public class InfoUsersEntity {
     Integer amountChildren;
     String note;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    UsersEntity user;
 }

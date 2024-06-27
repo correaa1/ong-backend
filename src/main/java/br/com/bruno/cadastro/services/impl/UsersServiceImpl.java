@@ -4,49 +4,35 @@ import br.com.bruno.cadastro.domain.UsersEntity;
 import br.com.bruno.cadastro.exception.EntityNotFoundException;
 import br.com.bruno.cadastro.repository.UserRepository;
 import br.com.bruno.cadastro.services.UsersService;
-
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsersServiceImpl implements UsersService {
 
-
     private final UserRepository repository;
-    private String address;
 
     public UsersServiceImpl(UserRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public UsersEntity saveUsers(UsersEntity entidade) {
-
-        entidade.setCreate_at(LocalDate.now().toString());
-        return repository.save(entidade);
+    public UsersEntity saveUsers(UsersEntity entity) {
+        entity.setCreate_at(LocalDate.now().toString());
+        return repository.save(entity);
     }
 
     @Override
-    public UsersEntity updateUsers(UsersEntity entidade, String id) {
+    public UsersEntity updateUsers(UsersEntity entity, String id) {
         var findId = repository.findById(id);
 
         if (findId.isPresent()) {
-            findId.get().setName(entidade.getName());
-            findId.get().setIdMainParent(entidade.getIdMainParent());
-            findId.get().setMainParent(entidade.getMainParent());
-            findId.get().setStats(entidade.getStats());
-            findId.get().setInfoUsers(entidade.getInfoUsers());
-            findId.get().setMonth(entidade.getMonth()  );
-            findId.get().setAddress(entidade.getAddress());
-            findId.get().setAge(entidade.getAge());
-            findId.get().setUpdate_at(LocalDate.now().toString());
-
-            return repository.save(findId.get());
-
+            entity.setId(id);
+            entity.setUpdate_at(LocalDate.now().toString());
+            return repository.save(entity);
         }
         throw new EntityNotFoundException("Usuário não encontrado!");
     }
@@ -56,63 +42,32 @@ public class UsersServiceImpl implements UsersService {
         var findId = repository.findById(id);
         if (findId.isPresent()) {
             repository.deleteById(id);
-
         } else {
-            throw new EntityNotFoundException("Usuário não encontrado.!");
+            throw new EntityNotFoundException("Usuário não encontrado!");
         }
     }
 
     @Override
     public List<UsersEntity> getAllUsers() {
-        var retorno = repository.findAll();
-        List<UsersEntity> listaUserEntity = new ArrayList<>();
-        retorno.forEach(x -> listaUserEntity.add(x));
-
-        return listaUserEntity;
+        Iterable<UsersEntity> usersIterable = repository.findAll();
+        List<UsersEntity> usersList = new ArrayList<>();
+        usersIterable.forEach(usersList::add);
+        return usersList;
     }
-    public List<UsersEntity> getUserByStats(boolean stats, boolean mainParent) {
-
-        List<UsersEntity> allUsers = (List<UsersEntity>) repository.findAll();
-        List<UsersEntity> filteredUsers = new ArrayList<>();
-
-        for (UsersEntity user : allUsers) {
-            if (user.getStats() == stats && user.getMainParent() == mainParent) {
-                filteredUsers.add(user);
-            }
-        }
-        if (filteredUsers.isEmpty()) {
-            throw new RuntimeException("Nenhum usuário encontrado com as condições especificadas.");
-        }
-        return filteredUsers;
-
-    }
-
-
 
     @Override
-    public List<UsersEntity> getUsersByAddress(String address){
-        return repository.findByAddress(address).get().stream().toList();
+    public List<UsersEntity> getUsersByAddress(String address) {
+        return null;
     }
-
 
     @Override
     public UsersEntity getUserById(String id) {
-        return repository.findById(id).orElseThrow(()-> new EntityNotFoundException("Usuário de ID " + id + " não encontrado!" ));
-
-        //Codigo a baixo e tem o mesmo efeito do de cima
-        /*var retorno = repository.findById(id);
-        if (retorno.isPresent()){
-            return retorno.get();
-        }
-        throw new RuntimeException("Usuário não encontrado");*/
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com ID: " + id));
     }
-
 
     @Override
-    public List<UsersEntity> getByMainparatById(String idMainParent ) {
-        return repository.findByidMainParent(idMainParent).get().stream().toList();
-
+    public List<UsersEntity> getUserByStats(boolean stats, boolean mainParent) {
+        return null;
     }
-
-
 }

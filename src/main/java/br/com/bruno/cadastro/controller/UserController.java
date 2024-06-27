@@ -4,12 +4,8 @@ import br.com.bruno.cadastro.domain.UsersEntity;
 import br.com.bruno.cadastro.services.UsersService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -22,50 +18,37 @@ public class UserController {
         this.service = service;
     }
 
-
     @GetMapping("/stats")
-    public List<UsersEntity> getUserByStats( ) {
-        return service.getUserByStats(true, true);
-    }
-
-
-    @GetMapping
-    public List<UsersEntity> getByMainparatById(@RequestParam(required = false) String idMainParent){
-        if(Objects.isNull(idMainParent) ){
-            return service.getAllUsers();
-        }
-        return service.getByMainparatById(idMainParent);
+    public List<UsersEntity> getUserByStats(@RequestParam boolean stats, @RequestParam boolean mainParent) {
+        return service.getUserByStats(stats, mainParent);
     }
 
     @GetMapping("/address")
-    public  List<UsersEntity> getAllAddress(){
+    public List<UsersEntity> getAllAddress() {
         return service.getUsersByAddress("address");
     }
 
-    //por algum motivo que não sei, o getMapping name está executando esse getMapping de id, por isso está comentado o código abaixo
     @GetMapping("/{id}")
-    public UsersEntity getUserById(@PathVariable("id") String id){
+    public UsersEntity getUserById(@PathVariable("id") String id) {
         return service.getUserById(id);
-
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UsersEntity SaveUser(@RequestBody UsersEntity entity ){
+    public UsersEntity saveUser(@RequestBody UsersEntity entity) {
         return service.saveUsers(entity);
     }
-    @PutMapping("/{id}")
-    public UsersEntity updateUser(@RequestBody UsersEntity entity, @PathVariable("id") String id){
-        var retorno = service.updateUsers(entity, id);
 
-        return retorno;
+    @PutMapping("/{id}")
+    public UsersEntity updateUser(@RequestBody UsersEntity entity, @PathVariable("id") String id) {
+        return service.updateUsers(entity, id);
     }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable("id") String id){
-       service.deleteUser(id);
-
+    public void deleteUser(@PathVariable("id") String id) {
+        service.deleteUser(id);
     }
 
-}
 
+}
