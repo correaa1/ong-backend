@@ -1,7 +1,7 @@
 package br.com.bruno.cadastro.controller;
 
-import br.com.bruno.cadastro.domain.UsersEntity;
-import br.com.bruno.cadastro.services.UsersService;
+import br.com.bruno.cadastro.domain.FamilyEntity;
+import br.com.bruno.cadastro.services.FamilyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,37 +10,37 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/v1/users")
-public class UserController {
+public class FamilyController {
 
-    private final UsersService service;
+    private final FamilyService service;
 
-    public UserController(UsersService service) {
+    public FamilyController(FamilyService service) {
         this.service = service;
     }
 
     @GetMapping("/stats")
-    public List<UsersEntity> getUserByStats(@RequestParam boolean stats, @RequestParam boolean mainParent) {
+    public List<FamilyEntity> getUserByStats(@RequestParam boolean stats, @RequestParam boolean mainParent) {
         return service.getUserByStats(stats, mainParent);
     }
 
     @GetMapping("/address")
-    public List<UsersEntity> getAllAddress() {
+    public List<FamilyEntity> getAllAddress() {
         return service.getUsersByAddress("address");
     }
 
     @GetMapping("/{id}")
-    public UsersEntity getUserById(@PathVariable("id") String id) {
+    public FamilyEntity getUserById(@PathVariable("id") String id) {
         return service.getUserById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UsersEntity saveUser(@RequestBody UsersEntity entity) {
+    public FamilyEntity saveUser(@RequestBody FamilyEntity entity) {
         return service.saveUsers(entity);
     }
 
     @PutMapping("/{id}")
-    public UsersEntity updateUser(@RequestBody UsersEntity entity, @PathVariable("id") String id) {
+    public FamilyEntity updateUser(@RequestBody FamilyEntity entity, @PathVariable("id") String id) {
         return service.updateUsers(entity, id);
     }
 

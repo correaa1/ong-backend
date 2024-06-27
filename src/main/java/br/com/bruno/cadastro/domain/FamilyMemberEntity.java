@@ -27,6 +27,6 @@ public class FamilyMemberEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "main_user_id", referencedColumnName = "id")
-    private UsersEntity mainUser;
+    private FamilyEntity mainUser;
     private String update_at;
 }

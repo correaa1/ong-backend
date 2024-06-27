@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_info_users")
-public class InfoUsersEntity {
+public class InfoFamilyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
@@ -23,5 +23,5 @@ public class InfoUsersEntity {
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    UsersEntity user;
+    FamilyEntity user;
 }

@@ -3,7 +3,6 @@ package br.com.bruno.cadastro.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -12,7 +11,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "tb_users")
-public class UsersEntity {
+public class FamilyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -30,7 +29,7 @@ public class UsersEntity {
     private String update_at;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private InfoUsersEntity infoUsers;
+    private InfoFamilyEntity infoUsers;
 
     @OneToMany(mappedBy = "mainUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FamilyMemberEntity> familyMembers;

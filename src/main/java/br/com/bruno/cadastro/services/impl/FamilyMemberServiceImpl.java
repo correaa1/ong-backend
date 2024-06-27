@@ -1,10 +1,10 @@
 package br.com.bruno.cadastro.services.impl;
 
 import br.com.bruno.cadastro.domain.FamilyMemberEntity;
-import br.com.bruno.cadastro.domain.UsersEntity;
+import br.com.bruno.cadastro.domain.FamilyEntity;
 import br.com.bruno.cadastro.exception.EntityNotFoundException;
 import br.com.bruno.cadastro.repository.FamilyMemberRepository;
-import br.com.bruno.cadastro.repository.UserRepository;
+import br.com.bruno.cadastro.repository.FamilyRepository;
 import br.com.bruno.cadastro.services.FamilyMemberService;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +14,16 @@ import java.time.LocalDate;
 public class FamilyMemberServiceImpl implements FamilyMemberService {
 
     private final FamilyMemberRepository repository;
-    private final UserRepository userRepository;
+    private final FamilyRepository familyRepository;
 
-    public FamilyMemberServiceImpl(FamilyMemberRepository repository, UserRepository userRepository) {
+    public FamilyMemberServiceImpl(FamilyMemberRepository repository, FamilyRepository familyRepository) {
         this.repository = repository;
-        this.userRepository = userRepository;
+        this.familyRepository = familyRepository;
     }
 
     @Override
     public FamilyMemberEntity saveFamilyMember(FamilyMemberEntity entity, String userId) {
-        UsersEntity mainUser = userRepository.findById(userId)
+        FamilyEntity mainUser = familyRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuário principal não encontrado com ID: " + userId));
 
         entity.setMainUser(mainUser); // Define o usuário principal no membro da família
