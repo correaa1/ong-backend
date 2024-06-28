@@ -7,4 +7,5 @@ public interface FamilyMemberService {
     FamilyMemberEntity getFamilyMemberById(String id);
     FamilyMemberEntity updateFamilyMember(FamilyMemberEntity entity, String id);
     void deleteFamilyMember(String id);
+
 }

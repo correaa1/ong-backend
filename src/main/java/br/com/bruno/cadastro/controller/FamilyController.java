@@ -23,6 +23,11 @@ public class FamilyController {
         return service.getUserByStats(stats, mainParent);
     }
 
+    @GetMapping
+    public List<FamilyEntity> getAllUsers() {
+        return service.getAllUsers();
+    }
+
     @GetMapping("/address")
     public List<FamilyEntity> getAllAddress() {
         return service.getUsersByAddress("address");
@@ -43,6 +48,7 @@ public class FamilyController {
     public FamilyEntity updateUser(@RequestBody FamilyEntity entity, @PathVariable("id") String id) {
         return service.updateUsers(entity, id);
     }
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

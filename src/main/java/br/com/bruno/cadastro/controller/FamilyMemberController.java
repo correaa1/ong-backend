@@ -22,12 +22,10 @@ public class FamilyMemberController {
         return service.saveFamilyMember(entity, userId);
     }
 
-
     @GetMapping("/{id}")
     public FamilyMemberEntity getFamilyMemberById(@PathVariable("id") String id) {
         return service.getFamilyMemberById(id);
     }
-
 
     @PutMapping("/{id}")
     public FamilyMemberEntity updateFamilyMember(@RequestBody FamilyMemberEntity entity, @PathVariable("id") String id) {
