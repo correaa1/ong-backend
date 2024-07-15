@@ -1,25 +1,45 @@
 package br.com.bruno.cadastro.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
 
-
-@Data
-@NoArgsConstructor
-@Builder
-@AllArgsConstructor
 @Entity
-@Table (name="tb_delivery")
 public class DeliveryEntity {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    String idDelivery;
-    String nameUser;
-    String idUser;
-    String create_at;
-    String update_at;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String month;
+
+    @ManyToMany
+    @JoinTable(
+            name = "delivery_user",
+            joinColumns = @JoinColumn(name = "delivery_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<FamilyEntity> users;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public List<FamilyEntity> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<FamilyEntity> users) {
+        this.users = users;
+    }
 }

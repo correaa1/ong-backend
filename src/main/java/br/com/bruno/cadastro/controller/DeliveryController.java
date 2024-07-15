@@ -4,7 +4,6 @@ import br.com.bruno.cadastro.domain.DeliveryEntity;
 import br.com.bruno.cadastro.services.DeliveryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -16,23 +15,25 @@ public class DeliveryController {
     public DeliveryController(DeliveryService service) {
         this.service = service;
     }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public List<DeliveryEntity> saveUsersDelivery(@RequestBody List<DeliveryEntity> entidades) {
-        return service.saveUsersDelivery(entidades);
+    public DeliveryEntity saveUserDelivery(@RequestBody DeliveryEntity delivery) {
+        return service.saveUserDelivery(delivery);
     }
 
     @GetMapping
-    public List<DeliveryEntity> getUsersDelivery(){
+    public List<DeliveryEntity> getUsersDelivery() {
         return service.getUsersDelivery();
+    }
+
+    @GetMapping("/{month}")
+    public List<DeliveryEntity> getDeliveriesByMonth(@PathVariable String month) {
+        return service.getDeliveriesByMonth(month);
     }
 
     @DeleteMapping("/{idDelivery}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable("idDelivery") String id){
-        service.deleteUser(id);
-
+    public void deleteDelivery(@PathVariable("idDelivery") Long id) {
+        service.deleteDelivery(id);
     }
-
 }

@@ -20,7 +20,6 @@ public class FamilyMemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-
     private String name;
     private Integer age;
     private Boolean stats;

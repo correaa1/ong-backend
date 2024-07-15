@@ -4,10 +4,9 @@ import br.com.bruno.cadastro.domain.DeliveryEntity;
 import java.util.List;
 
 public interface DeliveryService {
-
-    List<DeliveryEntity> saveUsersDelivery(List<DeliveryEntity> entidades);
-
-    void deleteUser(String idDelivery);
-
+    DeliveryEntity saveUserDelivery(DeliveryEntity delivery);
     List<DeliveryEntity> getUsersDelivery();
+    List<DeliveryEntity> getDeliveriesByMonth(String month);
+
+    void deleteDelivery(Long id);
 }

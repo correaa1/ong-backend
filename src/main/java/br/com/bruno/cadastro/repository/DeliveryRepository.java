@@ -2,8 +2,8 @@ package br.com.bruno.cadastro.repository;
 
 import br.com.bruno.cadastro.domain.DeliveryEntity;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
-public interface DeliveryRepository extends CrudRepository<DeliveryEntity, String> {
+public interface DeliveryRepository extends CrudRepository<DeliveryEntity, Long> {
+    List<DeliveryEntity> findByMonth(String month);
 }
