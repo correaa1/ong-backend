@@ -5,10 +5,10 @@ import br.com.bruno.cadastro.exception.EntityNotFoundException;
 import br.com.bruno.cadastro.repository.FamilyRepository;
 import br.com.bruno.cadastro.services.FamilyService;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FamilyServiceImpl implements FamilyService {
@@ -21,29 +21,38 @@ public class FamilyServiceImpl implements FamilyService {
 
     @Override
     public FamilyEntity saveUsers(FamilyEntity entity) {
-        entity.setCreate_at(LocalDate.now().toString());
+        entity.setCreatedAt(LocalDate.now().toString());
         return repository.save(entity);
     }
 
     @Override
     public FamilyEntity updateUsers(FamilyEntity entity, String id) {
-        var findId = repository.findById(id);
-
-        if (findId.isPresent()) {
-            entity.setId(id);
-            entity.setUpdate_at(LocalDate.now().toString());
-            return repository.save(entity);
+        Optional<FamilyEntity> optionalEntity = repository.findById(id);
+        if (optionalEntity.isPresent()) {
+            FamilyEntity existingEntity = optionalEntity.get();
+            existingEntity.setName(entity.getName());
+            existingEntity.setAge(entity.getAge());
+            existingEntity.setStats(entity.getStats());
+            existingEntity.setPhone(entity.getPhone());
+            existingEntity.setClothingSize(entity.getClothingSize());
+            existingEntity.setShoe(entity.getShoe());
+            existingEntity.setAmountParent(entity.getAmountParent());
+            existingEntity.setAmountChildren(entity.getAmountChildren());
+            existingEntity.setNote(entity.getNote());
+            existingEntity.setUpdatedAt(LocalDate.now().toString());
+            return repository.save(existingEntity);
+        } else {
+            throw new EntityNotFoundException("Usuário não encontrado com ID: " + id);
         }
-        throw new EntityNotFoundException("Usuário não encontrado!");
     }
 
     @Override
     public void deleteUser(String id) {
-        var findId = repository.findById(id);
-        if (findId.isPresent()) {
+        Optional<FamilyEntity> optionalEntity = repository.findById(id);
+        if (optionalEntity.isPresent()) {
             repository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("Usuário não encontrado!");
+            throw new EntityNotFoundException("Usuário não encontrado com ID: " + id);
         }
     }
 
@@ -69,5 +78,16 @@ public class FamilyServiceImpl implements FamilyService {
     @Override
     public List<FamilyEntity> getUserByStats(boolean stats, boolean mainParent) {
         return null;
+    }
+
+    @Override
+    public List<FamilyEntity> getFamilyMembersByIds(List<String> ids) { // Implementação do novo método
+        List<FamilyEntity> familyMembers = new ArrayList<>();
+        for (String id : ids) {
+            FamilyEntity familyMember = repository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com ID: " + id));
+            familyMembers.add(familyMember);
+        }
+        return familyMembers;
     }
 }

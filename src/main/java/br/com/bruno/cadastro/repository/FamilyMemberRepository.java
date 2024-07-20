@@ -1,9 +1,7 @@
 package br.com.bruno.cadastro.repository;
 
 import br.com.bruno.cadastro.domain.FamilyMemberEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-@Repository
-public interface FamilyMemberRepository extends JpaRepository<FamilyMemberEntity, String> {
+public interface FamilyMemberRepository extends CrudRepository<FamilyMemberEntity, String> {
 }

@@ -16,6 +16,8 @@ public interface FamilyService {
 
     List<FamilyEntity> getUsersByAddress(String address);
 
+    List<FamilyEntity> getFamilyMembersByIds(List<String> ids);
+
     FamilyEntity getUserById(String id);
 
     List<FamilyEntity> getUserByStats(boolean stats, boolean mainParent);

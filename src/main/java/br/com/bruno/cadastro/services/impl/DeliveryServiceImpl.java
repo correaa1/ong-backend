@@ -3,15 +3,17 @@ package br.com.bruno.cadastro.services.impl;
 import br.com.bruno.cadastro.domain.DeliveryEntity;
 import br.com.bruno.cadastro.repository.DeliveryRepository;
 import br.com.bruno.cadastro.services.DeliveryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DeliveryServiceImpl implements DeliveryService {
+
     private final DeliveryRepository repository;
 
+    @Autowired
     public DeliveryServiceImpl(DeliveryRepository repository) {
         this.repository = repository;
     }
@@ -33,7 +35,6 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public void deleteDelivery(Long id) {
-        Optional<DeliveryEntity> delivery = repository.findById(id);
-        delivery.ifPresent(repository::delete);
+        repository.deleteById(id);
     }
 }

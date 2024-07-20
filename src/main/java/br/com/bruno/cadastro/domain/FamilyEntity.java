@@ -25,8 +25,8 @@ public class FamilyEntity {
     private Integer amountParent;
     private Integer amountChildren;
     private String note;
-    private String create_at;
-    private String update_at;
+    private String createdAt;
+    private String updatedAt;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private InfoFamilyEntity infoUsers;

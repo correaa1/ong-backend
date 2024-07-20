@@ -1,14 +1,13 @@
 package br.com.bruno.cadastro.services.impl;
 
-import br.com.bruno.cadastro.domain.FamilyMemberEntity;
 import br.com.bruno.cadastro.domain.FamilyEntity;
+import br.com.bruno.cadastro.domain.FamilyMemberEntity;
 import br.com.bruno.cadastro.exception.EntityNotFoundException;
 import br.com.bruno.cadastro.repository.FamilyMemberRepository;
 import br.com.bruno.cadastro.repository.FamilyRepository;
 import br.com.bruno.cadastro.services.FamilyMemberService;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class FamilyMemberServiceImpl implements FamilyMemberService {
@@ -22,13 +21,16 @@ public class FamilyMemberServiceImpl implements FamilyMemberService {
     }
 
     @Override
+    @Transactional
     public FamilyMemberEntity saveFamilyMember(FamilyMemberEntity entity, String userId) {
         FamilyEntity mainUser = familyRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuário principal não encontrado com ID: " + userId));
 
-        entity.setMainUser(mainUser); // Define o usuário principal no membro da família
-        entity.setUpdate_at(LocalDate.now().toString());
+        if (mainUser.getId() == null) {
+            throw new EntityNotFoundException("A FamilyEntity deve ser persistida antes de associar um FamilyMemberEntity.");
+        }
 
+        entity.setMainUser(mainUser);
         return repository.save(entity);
     }
 
@@ -39,23 +41,21 @@ public class FamilyMemberServiceImpl implements FamilyMemberService {
     }
 
     @Override
+    @Transactional
     public FamilyMemberEntity updateFamilyMember(FamilyMemberEntity entity, String id) {
-        var existingMember = repository.findById(id)
+        FamilyMemberEntity existingMember = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Membro da família não encontrado com ID: " + id));
 
         existingMember.setName(entity.getName());
         existingMember.setAge(entity.getAge());
         existingMember.setStats(entity.getStats());
-        existingMember.setUpdate_at(LocalDate.now().toString());
 
         return repository.save(existingMember);
     }
 
     @Override
+    @Transactional
     public void deleteFamilyMember(String id) {
-        var existingMember = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Membro da família não encontrado com ID: " + id));
-
         repository.deleteById(id);
     }
 }
