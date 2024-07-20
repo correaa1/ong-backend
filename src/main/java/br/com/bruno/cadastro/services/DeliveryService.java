@@ -10,5 +10,6 @@ public interface DeliveryService {
 
     List<DeliveryEntity> getDeliveriesByMonth(String month);
 
-    void deleteDelivery(Long id);
+    void removeUsersFromDelivery(String month, List<String> userIds);
+
 }

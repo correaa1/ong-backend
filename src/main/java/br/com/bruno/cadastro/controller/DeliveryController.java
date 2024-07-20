@@ -23,25 +23,15 @@ public class DeliveryController {
     }
 
     public static class DeliveryRequest {
-        public String month;
-        public String name;
-        public List<String> userIds;
+        private String month;
+        private List<String> userIds;
 
-        // Getters e Setters
         public String getMonth() {
             return month;
         }
 
         public void setMonth(String month) {
             this.month = month;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
         }
 
         public List<String> getUserIds() {
@@ -53,6 +43,33 @@ public class DeliveryController {
         }
     }
 
+    public static class RemoveUsersRequest {
+        private String month;
+        private List<String> userIds;
+
+        // Getters e Setters
+        public String getMonth() {
+            return month;
+        }
+
+        public void setMonth(String month) {
+            this.month = month;
+        }
+
+        public List<String> getUserIds() {
+            return userIds;
+        }
+
+        public void setUserIds(List<String> userIds) {
+            this.userIds = userIds;
+        }
+    }
+
+
+
+
+
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DeliveryEntity saveUserDelivery(@RequestBody DeliveryRequest deliveryRequest) {
@@ -61,7 +78,6 @@ public class DeliveryController {
 
         DeliveryEntity delivery = new DeliveryEntity();
         delivery.setMonth(deliveryRequest.getMonth());
-        delivery.setName(deliveryRequest.getName());
         delivery.setUsers(users);
 
         return service.saveUserDelivery(delivery);
@@ -77,9 +93,13 @@ public class DeliveryController {
         return service.getDeliveriesByMonth(month);
     }
 
-    @DeleteMapping("/{idDelivery}")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteDelivery(@PathVariable("idDelivery") Long id) {
-        service.deleteDelivery(id);
+    public void deleteUsersFromDelivery(@RequestBody RemoveUsersRequest request) {
+        service.removeUsersFromDelivery(request.getMonth(), request.getUserIds());
     }
+
+
+
+
 }
