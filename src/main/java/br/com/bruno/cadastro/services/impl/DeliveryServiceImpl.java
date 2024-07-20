@@ -22,8 +22,29 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public DeliveryEntity saveUserDelivery(DeliveryEntity delivery) {
-        return repository.save(delivery);
+        List<DeliveryEntity> existingDeliveries = repository.findByMonth(delivery.getMonth());
+
+        if (existingDeliveries.isEmpty()) {
+            // No existing delivery for the month, create new
+            return repository.save(delivery);
+        } else {
+            // Update existing delivery
+            DeliveryEntity existingDelivery = existingDeliveries.get(0);
+            List<FamilyEntity> currentUsers = existingDelivery.getUsers();
+            List<FamilyEntity> newUsers = delivery.getUsers();
+
+            // Add only new users that are not already present
+            for (FamilyEntity user : newUsers) {
+                if (!currentUsers.stream().anyMatch(u -> u.getId().equals(user.getId()))) {
+                    currentUsers.add(user);
+                }
+            }
+
+            existingDelivery.setUsers(currentUsers);
+            return repository.save(existingDelivery);
+        }
     }
+
 
     @Override
     public List<DeliveryEntity> getUsersDelivery() {

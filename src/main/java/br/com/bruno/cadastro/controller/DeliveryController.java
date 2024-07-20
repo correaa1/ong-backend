@@ -47,7 +47,6 @@ public class DeliveryController {
         private String month;
         private List<String> userIds;
 
-        // Getters e Setters
         public String getMonth() {
             return month;
         }
@@ -65,15 +64,9 @@ public class DeliveryController {
         }
     }
 
-
-
-
-
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DeliveryEntity saveUserDelivery(@RequestBody DeliveryRequest deliveryRequest) {
-
         List<FamilyEntity> users = familyService.getFamilyMembersByIds(deliveryRequest.getUserIds());
 
         DeliveryEntity delivery = new DeliveryEntity();
@@ -98,8 +91,4 @@ public class DeliveryController {
     public void deleteUsersFromDelivery(@RequestBody RemoveUsersRequest request) {
         service.removeUsersFromDelivery(request.getMonth(), request.getUserIds());
     }
-
-
-
-
 }
